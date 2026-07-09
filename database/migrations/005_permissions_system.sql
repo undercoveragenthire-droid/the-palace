@@ -13,11 +13,11 @@ CREATE TABLE permissions (
   name TEXT NOT NULL,
   description TEXT NOT NULL,
   category TEXT NOT NULL,  -- viewing, participation, administration
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  
-  COMMENT ON TABLE permissions IS 'Technical permissions (not visible to members - Standing and Offices are the visible layer)';
-  COMMENT ON COLUMN permissions.category IS 'viewing (read access), participation (contribute), administration (manage)';
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+COMMENT ON TABLE permissions IS 'Technical permissions (not visible to members - Standing and Offices are the visible layer)';
+COMMENT ON COLUMN permissions.category IS 'viewing (read access), participation (contribute), administration (manage)';
 
 -- ============================================================================
 -- TABLE: standing_permissions
@@ -31,10 +31,10 @@ CREATE TABLE standing_permissions (
   
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   
-  UNIQUE(standing_name, permission_id),
-  
-  COMMENT ON TABLE standing_permissions IS 'Maps Standing levels to technical permissions';
+  UNIQUE(standing_name, permission_id)
 );
+
+COMMENT ON TABLE standing_permissions IS 'Maps Standing levels to technical permissions';
 
 CREATE INDEX idx_standing_permissions_standing ON standing_permissions(standing_name);
 CREATE INDEX idx_standing_permissions_permission ON standing_permissions(permission_id);
@@ -51,10 +51,10 @@ CREATE TABLE office_permissions (
   
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   
-  UNIQUE(office_id, permission_id),
-  
-  COMMENT ON TABLE office_permissions IS 'Maps offices to technical permissions';
+  UNIQUE(office_id, permission_id)
 );
+
+COMMENT ON TABLE office_permissions IS 'Maps offices to technical permissions';
 
 CREATE INDEX idx_office_permissions_office ON office_permissions(office_id);
 CREATE INDEX idx_office_permissions_permission ON office_permissions(permission_id);
